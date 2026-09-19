@@ -1,47 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#070613">
-  <title>Hogwarts Hand-Magic</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
-  <style>
-    :root{--ink:#070613;--night:#0e0b2a;--paper:#eadfc4;--gold:#e6b64c;--red:#ff4b2a;--blue:#46a8ff}
-    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--ink);color:var(--paper);font-family:'IM Fell English',Georgia,serif}
-    body{overflow:hidden}button{font:inherit;cursor:pointer}.app{min-height:100vh;position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 38%,#2b1c50 0,#120d31 42%,#070613 100%)}
-    .stars{position:absolute;inset:0;background-image:radial-gradient(#fff5d0 1px,transparent 1px);background-size:43px 43px;opacity:.35}.moon{position:absolute;right:13%;top:12%;width:75px;height:75px;border-radius:50%;background:#f6ecd0;box-shadow:0 0 60px 20px #f6ecd044}
-    .castle{position:absolute;bottom:0;left:0;right:0;height:23%;background:#070518;clip-path:polygon(0 48%,8% 48%,10% 25%,14% 48%,22% 48%,24% 8%,27% 48%,34% 48%,37% 30%,40% 48%,47% 48%,50% 0,53% 48%,60% 48%,64% 28%,67% 48%,75% 48%,78% 10%,81% 48%,90% 48%,93% 25%,96% 48%,100% 48%,100% 100%,0 100%)}
-    .panel{position:relative;z-index:2;width:min(570px,calc(100% - 28px));padding:28px 24px;text-align:center;background:#0c0923dd;border:1px solid #e6b64c99;outline:1px solid #e6b64c33;outline-offset:7px;backdrop-filter:blur(6px)}
-    h1{margin:0 0 10px;color:#f5dc9a;font-family:'Cinzel Decorative',serif;font-size:clamp(27px,7vw,46px);line-height:1.12;text-shadow:0 0 22px #e6b64c66}p{font-size:clamp(17px,4.5vw,20px);line-height:1.45}.legend{text-align:left;width:max-content;max-width:100%;margin:20px auto;padding:0;list-style:none;font-size:17px}.legend li{margin:9px 0}.dot{display:inline-block;width:12px;height:12px;margin-right:9px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
-    .actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.btn{padding:11px 17px;border:1px solid #e6b64c99;border-radius:3px;background:#100d2dcc;color:#f5dc9a;font-size:17px}.btn.primary{background:linear-gradient(#f0c766,#b97e1f);color:#1a1204;border-color:#f5d98b}.btn:disabled{opacity:.6;cursor:wait}.message{min-height:24px;color:#ffb3a1;font-size:16px}.fine{font-size:14px;opacity:.7}
-    #camera{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);opacity:0;transition:opacity .5s;z-index:3;background:#000}#camera.visible{opacity:.55}.stage{position:fixed;inset:0;z-index:4;pointer-events:none;display:none}.stage.active{display:block}.hud{position:absolute;left:0;right:0;bottom:0;padding:18px;color:#fff6e0;text-align:center;text-shadow:0 1px 8px #000}.spell{font-size:clamp(30px,8vw,58px);font-style:italic;opacity:0;transition:opacity .2s;text-shadow:0 0 18px currentColor}.spell.show{opacity:1}.back{pointer-events:auto;position:absolute;right:16px;top:16px}.orb{position:absolute;width:150px;height:150px;margin:-75px;border-radius:50%;opacity:0;filter:blur(2px);transition:opacity .2s;mix-blend-mode:screen}.orb.red{background:radial-gradient(circle,#fff,#ff4b2a 20%,transparent 70%)}.orb.blue{background:radial-gradient(circle,#fff,#46a8ff 20%,transparent 70%)}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070613">
+<title>Hogwarts Hand-Magic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#070613;--paper:#eadfc4;--gold:#f5dc9a;--red:#ff4b2a;--blue:#46a8ff}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--ink);color:var(--paper);font-family:'IM Fell English',Georgia,serif}button{font:inherit;cursor:pointer;touch-action:manipulation}
+#backdrop{position:fixed;inset:0;background:radial-gradient(circle at 50% 32%,#35205d,#120d31 48%,#070613 100%);z-index:0}.stars{position:absolute;inset:0;opacity:.45;background-image:radial-gradient(#fff5d0 1px,transparent 1px);background-size:41px 41px}.moon{position:absolute;right:12%;top:12%;width:72px;height:72px;border-radius:50%;background:#f6ecd0;box-shadow:0 0 55px 20px #f6ecd044}.castle{position:absolute;bottom:0;width:100%;height:27%;background:#070518;clip-path:polygon(0 55%,8% 55%,10% 20%,13% 55%,22% 55%,25% 5%,28% 55%,37% 55%,40% 26%,43% 55%,48% 55%,50% 0,53% 55%,60% 55%,63% 25%,66% 55%,75% 55%,78% 9%,81% 55%,90% 55%,94% 25%,97% 55%,100% 55%,100% 100%,0 100%)}
+#intro{position:fixed;inset:0;z-index:5;display:grid;place-items:center;padding:18px}.panel{width:min(570px,100%);padding:26px 23px;text-align:center;background:#0c0923e8;border:1px solid #e6b64c99;outline:1px solid #e6b64c33;outline-offset:7px;backdrop-filter:blur(7px)}h1{margin:0 0 10px;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:clamp(27px,7vw,46px);line-height:1.12;text-shadow:0 0 22px #e6b64c66}p{font-size:clamp(17px,4.5vw,20px);line-height:1.45}.legend{list-style:none;width:max-content;max-width:100%;padding:0;margin:19px auto;font-size:17px;text-align:left}.legend li{margin:9px 0}.dot{display:inline-block;width:12px;height:12px;margin-right:9px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}.btn{padding:11px 17px;border:1px solid #e6b64c99;border-radius:3px;background:#100d2dcc;color:var(--gold);font-size:17px}.primary{background:linear-gradient(#f0c766,#b97e1f);color:#1a1204;border-color:#f5d98b}.btn:disabled{opacity:.6;cursor:wait}.message{min-height:25px;color:#ffb3a1;font-size:16px;margin:13px 0 0}.fine{font-size:14px;opacity:.7}
+#camera{position:fixed;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);opacity:0;transition:opacity .5s;background:#000}#camera.visible{opacity:.58}.veil{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,#03020ccc 100%)}#fx{position:fixed;inset:0;z-index:3;pointer-events:none}.stage{position:fixed;inset:0;z-index:4;display:none;pointer-events:none}.stage.active{display:block}.hud{position:absolute;left:0;right:0;bottom:0;padding:18px;text-align:center;color:#fff6e0;text-shadow:0 1px 8px #000;pointer-events:auto}.spell{font-size:clamp(29px,8vw,58px);font-style:italic;opacity:0;text-shadow:0 0 18px currentColor;transition:opacity .2s}.spell.show{opacity:1}.back{position:absolute;right:16px;top:16px;z-index:5;pointer-events:auto}.notice{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:min(560px,calc(100% - 32px));text-align:center;color:#fff6e0;text-shadow:0 1px 6px #000}
+</style>
 </head>
 <body>
-  <main class="app" id="intro"><div class="stars"></div><div class="moon"></div><div class="castle"></div><section class="panel"><h1>Hogwarts Hand-Magic</h1><p>Show your hands to the camera and cast. Each hand throws its own spell, and when they meet, something older wakes up.</p><ul class="legend"><li><span class="dot" style="--c:#ff4b2a"></span>Left hand casts Incendio, red fire</li><li><span class="dot" style="--c:#46a8ff"></span>Right hand casts Glacius, blue frost</li><li><span class="dot" style="--c:#ffcf6b"></span>Hands together cast Priori Incantatem</li></ul><div class="actions"><button class="btn primary" id="start">Start camera</button><button class="btn" id="demo">Cast with mouse or touch</button></div><p class="message" id="message" role="alert" aria-live="polite"></p><p class="fine">Your camera is processed locally and is never recorded or uploaded.</p></section></main>
-  <video id="camera" playsinline autoplay muted></video><section class="stage" id="stage" aria-live="polite"><button class="btn back" id="back">Exit</button><div class="orb red" id="red"></div><div class="orb blue" id="blue"></div><div class="hud"><div class="spell" id="spell"></div><div id="hint">Raise a hand.</div></div></section>
-  <script>
-  (()=>{'use strict';
-    const $=s=>document.querySelector(s), video=$('#camera'), intro=$('#intro'), stage=$('#stage'), msg=$('#message'), spell=$('#spell'), hint=$('#hint'), red=$('#red'), blue=$('#blue');
-    let stream=null,mode='';let pointers=new Map();
-    function setMessage(text){msg.textContent=text}
-    function openStage(next){mode=next;intro.style.display='none';stage.classList.add('active');if(next==='camera')video.classList.add('visible');}
-    function closeStage(){if(stream){stream.getTracks().forEach(track=>track.stop());stream=null}video.srcObject=null;video.classList.remove('visible');stage.classList.remove('active');intro.style.display='grid';spell.className='spell';red.style.opacity=blue.style.opacity=0;mode=''}
-    async function startCamera(){
-      $('#start').disabled=true;setMessage('Requesting camera permission…');
-      if(!window.isSecureContext){setMessage('Camera access requires HTTPS (or localhost). Deploy this site with HTTPS and try again.');$('#start').disabled=false;return}
-      if(!navigator.mediaDevices?.getUserMedia){setMessage('This browser does not support camera access. Use mouse or touch instead.');$('#start').disabled=false;return}
-      try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'user'},width:{ideal:1280},height:{ideal:720}},audio:false});video.srcObject=stream;await video.play();setMessage('');openStage('camera')}
-      catch(error){const text=error?.name==='NotAllowedError'?'Camera permission was denied. Allow camera access in your browser settings, then try again.':error?.name==='NotFoundError'?'No camera was found on this device.':'The camera could not be opened. Check browser permissions and try again.';setMessage(text);$('#start').disabled=false}
-    }
-    function showSpell(text,color,x,y){spell.textContent=text;spell.style.color=color;spell.className='spell show';hint.textContent=text==='Priori Incantatem'?'The two spells have met. Move apart to break them.':'Move your hand to cast.';const el=text.startsWith('Incendio')?red:blue;el.style.left=x+'px';el.style.top=y+'px';el.style.opacity=.9;setTimeout(()=>{el.style.opacity=0},180)}
-    function updatePointers(){const ps=[...pointers.values()];if(!ps.length){spell.className='spell';hint.textContent='Touch or move to cast.';return}if(ps.length>1){const x=(ps[0].x+ps[1].x)/2,y=(ps[0].y+ps[1].y)/2;showSpell('Priori Incantatem','#ffcf6b',x,y)}else{const p=ps[0],left=p.x<innerWidth/2;showSpell(left?'Incendio':'Glacius',left?'#ff6a45':'#7fd0ff',p.x,p.y)}}
-    addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(mode==='demo')updatePointers()});addEventListener('pointermove',e=>{if(pointers.has(e.pointerId)){pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(mode==='demo')updatePointers()}});addEventListener('pointerup',e=>{pointers.delete(e.pointerId);if(mode==='demo')updatePointers()});addEventListener('pointercancel',e=>pointers.delete(e.pointerId));
-    $('#start').addEventListener('click',startCamera);$('#demo').addEventListener('click',()=>openStage('demo'));$('#back').addEventListener('click',closeStage);addEventListener('pagehide',()=>{if(stream)stream.getTracks().forEach(track=>track.stop())});
-  })();
-  </script>
+<div id="backdrop" aria-hidden="true"><div class="stars"></div><div class="moon"></div><div class="castle"></div></div>
+<main id="intro"><section class="panel"><h1>Hogwarts Hand-Magic</h1><p>Allow camera access, then wave your hands to cast. Move both hands together to awaken the older magic.</p><ul class="legend"><li><span class="dot" style="--c:#ff4b2a"></span>Left side: Incendio</li><li><span class="dot" style="--c:#46a8ff"></span>Right side: Glacius</li><li><span class="dot" style="--c:#ffcf6b"></span>Both sides: Priori Incantatem</li></ul><div class="actions"><button class="btn primary" id="start">Start camera</button><button class="btn" id="demo">Use mouse / touch</button></div><p class="message" id="message" role="alert" aria-live="polite"></p><p class="fine">Camera frames are processed locally and are never uploaded.</p></section></main>
+<video id="camera" playsinline autoplay muted></video><div class="veil"></div><canvas id="fx"></canvas>
+<section id="stage" class="stage" aria-live="polite"><button class="btn back" id="back">Exit</button><div class="notice" id="notice">Wave your hand in front of the camera.</div><div class="hud"><div class="spell" id="spell"></div><div id="hint">Raise a hand and wave.</div></div></section>
+<script>
+(()=>{
+'use strict';
+const $=s=>document.querySelector(s),intro=$('#intro'),stage=$('#stage'),video=$('#camera'),canvas=$('#fx'),ctx=canvas.getContext('2d'),spell=$('#spell'),hint=$('#hint'),message=$('#message'),notice=$('#notice');
+let stream=null,mode='',raf=0,lastFrame=0,previous=null,source=document.createElement('canvas'),sctx=source.getContext('2d',{willReadFrequently:true}),pointers=new Map(),lastSpell='';
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+function say(t){message.textContent=t}
+function enter(next){mode=next;intro.style.display='none';stage.classList.add('active');if(next==='camera'){video.classList.add('visible');notice.textContent='Wave your hand in front of the camera.'}else{notice.textContent='Move the mouse or touch the screen to cast.'}}
+function exit(){cancelAnimationFrame(raf);if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}video.pause();video.srcObject=null;video.classList.remove('visible');stage.classList.remove('active');intro.style.display='grid';mode='';clear();}
+function clear(){ctx.clearRect(0,0,innerWidth,innerHeight);spell.className='spell';lastSpell=''}
+async function startCamera(){
+ const button=$('#start');button.disabled=true;say('Requesting camera permission…');
+ if(!window.isSecureContext){say('Camera needs HTTPS or localhost. Open the deployed HTTPS link, not a file or HTTP preview.');button.disabled=false;return}
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){say('This browser cannot use the camera. Choose Use mouse / touch instead.');button.disabled=false;return}
+ try{stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'user'},width:{ideal:1280},height:{ideal:720}}});video.srcObject=stream;await video.play();say('');enter('camera');startLoop()}
+ catch(e){stream=null;let t=e&&e.name==='NotAllowedError'?'Permission was denied. Allow camera access in the browser site settings and try again.':e&&e.name==='NotFoundError'?'No camera was found on this device.':'The camera could not open. Check permissions, then try again.';say(t);button.disabled=false}
+}
+function showSpell(name,x,y){const color=name==='Incendio'?'#ff6a45':name==='Glacius'?'#7fd0ff':'#ffcf6b';spell.textContent=name;spell.style.color=color;spell.className='spell show';spell.style.position='fixed';spell.style.left=clamp(x,90,innerWidth-90)+'px';spell.style.top=clamp(y,90,innerHeight-130)+'px';spell.style.transform='translate(-50%,-50%)';if(name!==lastSpell){lastSpell=name;hint.textContent=name==='Priori Incantatem'?'The two spells have met. Move apart to break them.':'Move your hand to cast.'}drawBurst(x,y,color)}
+function drawBurst(x,y,color){ctx.save();ctx.globalCompositeOperation='lighter';for(let i=0;i<8;i++){const a=Math.random()*Math.PI*2,r=22+Math.random()*36;ctx.fillStyle=color;ctx.globalAlpha=.8;ctx.beginPath();ctx.arc(x+Math.cos(a)*r,y+Math.sin(a)*r,2+Math.random()*4,0,Math.PI*2);ctx.fill()}ctx.restore()}
+function pointerCast(){const ps=[...pointers.values()];if(!ps.length){spell.className='spell';lastSpell='';return}if(ps.length>1){showSpell('Priori Incantatem',(ps[0].x+ps[1].x)/2,(ps[0].y+ps[1].y)/2);return}const p=ps[0];showSpell(p.x<innerWidth/2?'Incendio':'Glacius',p.x,p.y)}
+function detectMotion(){if(video.readyState<2)return;const w=96,h=72;source.width=w;source.height=h;sctx.save();sctx.translate(w,0);sctx.scale(-1,1);sctx.drawImage(video,0,0,w,h);sctx.restore();const data=sctx.getImageData(0,0,w,h).data;if(!previous){previous=new Uint8Array(w*h);for(let i=0;i<w*h;i++)previous[i]=(data[i*4]+data[i*4+1]+data[i*4+2])/3;return}let lx=0,ly=0,ln=0,rx=0,ry=0,rn=0;for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=y*w+x,j=i*4,g=(data[j]+data[j+1]+data[j+2])/3,d=Math.abs(g-previous[i]);previous[i]=g;if(d>18){if(x<w/2){lx+=x;ly+=y;ln++}else{rx+=x;ry+=y;rn++}}}const points=[];if(ln>18)points.push({x:lx/ln/w*innerWidth,y:ly/ln/h*innerHeight});if(rn>18)points.push({x:rx/rn/w*innerWidth,y:ry/rn/h*innerHeight});if(points.length===2)showSpell('Priori Incantatem',(points[0].x+points[1].x)/2,(points[0].y+points[1].y)/2);else if(points.length===1)showSpell(points[0].x<innerWidth/2?'Incendio':'Glacius',points[0].x,points[0].y)}
+function loop(now){if(mode!=='camera')return;if(now-lastFrame>70){lastFrame=now;detectMotion()}raf=requestAnimationFrame(loop)}
+addEventListener('resize',resize);addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(mode==='demo')pointerCast()});addEventListener('pointermove',e=>{if(pointers.has(e.pointerId)){pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(mode==='demo')pointerCast()}});addEventListener('pointerup',e=>{pointers.delete(e.pointerId);if(mode==='demo')pointerCast()});addEventListener('pointercancel',e=>pointers.delete(e.pointerId));
+$('#start').addEventListener('click',startCamera);$('#demo').addEventListener('click',()=>enter('demo'));$('#back').addEventListener('click',exit);addEventListener('pagehide',()=>{if(stream)stream.getTracks().forEach(t=>t.stop())});resize();
+})();
+</script>
 </body>
 </html>
